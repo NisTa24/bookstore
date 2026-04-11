@@ -17,6 +17,10 @@ module Inventory
 
     def reserve!(quantity)
       with_lock do
+        # Between the moment Ruby calls with_lock and the moment the lock is actually granted, another thread/process
+        # may have already changed quantity_on_hand or quantity_reserved. Without reload, the in-memory values would be
+        # stale, and the subsequent check (can_reserve?) or update could operate on outdated data — leading to
+        # overselling or incorrect stock counts.
         reload
         raise InsufficientStockError unless can_reserve?(quantity)
         update!(quantity_reserved: quantity_reserved + quantity)
@@ -26,7 +30,7 @@ module Inventory
     def release!(quantity)
       with_lock do
         reload
-        new_reserved = [quantity_reserved - quantity, 0].max
+        new_reserved = [ quantity_reserved - quantity, 0 ].max
         update!(quantity_reserved: new_reserved)
       end
     end
