@@ -14,4 +14,8 @@ Rails.application.routes.draw do
   namespace :catalog do
     resources :books, only: [ :index, :show, :new, :create ]
   end
+
+  namespace :inventory do
+    resources :stock_items, only: [ :index, :show, :new, :create ]
+  end
 end
