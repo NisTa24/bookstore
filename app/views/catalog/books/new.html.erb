@@ -1,0 +1,40 @@
+<h1>New Book</h1>
+
+<% if flash[:alert] %>
+  <div style="color: red;">
+    <p><%= flash[:alert] %></p>
+  </div>
+<% end %>
+
+<%= form_with scope: :book, url: catalog_books_path, method: :post do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :isbn %>
+    <%= f.text_field :isbn, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div>
+    <%= f.label :author_id, "Author" %>
+    <%= f.collection_select :author_id, @authors, :id, :name, include_blank: "Select an author" %>
+  </div>
+
+  <div>
+    <%= f.label :category_id, "Category" %>
+    <%= f.collection_select :category_id, @categories, :id, :name, include_blank: "Select a category" %>
+  </div>
+
+  <div>
+    <%= f.submit "Create Book" %>
+  </div>
+<% end %>
+
+<%= link_to "Back to Books", catalog_books_path %>
