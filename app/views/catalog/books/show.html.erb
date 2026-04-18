@@ -1,5 +1,9 @@
 <h1><%= @book.title %></h1>
 
+<% if flash[:notice] %>
+  <p style="color: green;"><%= flash[:notice] %></p>
+<% end %>
+
 <table>
   <tbody>
     <tr>

@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   end
 
   namespace :catalog do
-    resources :books, only: [ :index, :show ]
+    resources :books, only: [ :index, :show, :new, :create ]
   end
 end
