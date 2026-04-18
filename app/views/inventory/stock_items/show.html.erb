@@ -1,0 +1,17 @@
+<h1>Stock: <%= @book&.title || @stock.book_id %></h1>
+
+<% if flash[:notice] %>
+  <p style="color: green;"><%= flash[:notice] %></p>
+<% end %>
+
+<table>
+  <tbody>
+    <tr><th>Book ID</th><td><%= @stock.book_id %></td></tr>
+    <tr><th>On Hand</th><td><%= @stock.quantity_on_hand %></td></tr>
+    <tr><th>Reserved</th><td><%= @stock.quantity_reserved %></td></tr>
+    <tr><th>Available</th><td><%= @stock.available_quantity %></td></tr>
+  </tbody>
+</table>
+
+<%= link_to "Register More Stock", new_inventory_stock_item_path %>
+<%= link_to "Back to Books", catalog_books_path %>
