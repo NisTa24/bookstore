@@ -1,0 +1,30 @@
+<h1>Inventory Stock Items</h1>
+
+<% if flash[:notice] %>
+  <p style="color: green;"><%= flash[:notice] %></p>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Book</th>
+      <th>On Hand</th>
+      <th>Reserved</th>
+      <th>Available</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @stock_items.each do |stock| %>
+      <tr>
+        <td><%= @books[stock.book_id]&.title || stock.book_id %></td>
+        <td><%= stock.quantity_on_hand %></td>
+        <td><%= stock.quantity_reserved %></td>
+        <td><%= stock.available_quantity %></td>
+        <td><%= link_to "View Details", inventory_stock_item_path(stock.book_id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to "Register Stock", new_inventory_stock_item_path %>

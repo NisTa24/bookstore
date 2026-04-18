@@ -1,5 +1,10 @@
 module Inventory
   class StockItemsController < ApplicationController
+    def index
+      @stock_items = Inventory::StockItem.all
+      @books = Catalog::ReadModels::BookListing.all.index_by(&:book_id)
+    end
+
     def show
       @stock = Inventory::StockItem.find_by!(book_id: params[:id])
       @book = Catalog::ReadModels::BookListing.find_by(book_id: params[:id])
