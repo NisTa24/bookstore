@@ -1,0 +1,32 @@
+<h1><%= @book.title %></h1>
+
+<table>
+  <tbody>
+    <tr>
+      <th>ISBN</th>
+      <td><%= @book.isbn %></td>
+    </tr>
+    <tr>
+      <th>Author</th>
+      <td><%= @book.author_name %></td>
+    </tr>
+    <tr>
+      <th>Category</th>
+      <td><%= @book.category_name %></td>
+    </tr>
+    <tr>
+      <th>Price</th>
+      <td><%= @book.price_cents.present? ? number_to_currency(@book.price_cents / 100.0) : '' %></td>
+    </tr>
+    <tr>
+      <th>Stock Available</th>
+      <td><%= @book.stock_available %></td>
+    </tr>
+    <tr>
+      <th>Status</th>
+      <td><%= @book.status %></td>
+    </tr>
+  </tbody>
+</table>
+
+<%= link_to "Back to Books", catalog_books_path %>
