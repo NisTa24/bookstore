@@ -4,8 +4,8 @@ RSpec.describe Catalog::Listeners::UpdateBookListing do
   subject(:listener) { described_class.new }
 
   describe "#book_added" do
-    let(:author) { Catalog::Author.create!(name: "Eric Evans") }
-    let(:category) { Catalog::Category.create!(name: "Software", slug: "software") }
+    let(:author) { Catalog::Author.create(name: "Eric Evans") }
+    let(:category) { Catalog::Category.create(name: "Software", slug: "software") }
 
     it "creates a BookListing read model" do
       event = Catalog::Events::BookAdded.new(
@@ -45,7 +45,7 @@ RSpec.describe Catalog::Listeners::UpdateBookListing do
 
   describe "#book_updated" do
     before do
-      Catalog::ReadModels::BookListing.create!(
+      Catalog::ReadModels::BookListing.create(
         book_id: "uuid-1",
         title: "Old Title",
         isbn: "9780306406157",
@@ -58,7 +58,7 @@ RSpec.describe Catalog::Listeners::UpdateBookListing do
         book_id: "uuid-1",
         title: "New Title",
         isbn: "9780134685991",
-        changes: ["title", "isbn"]
+        changes: [ "title", "isbn" ]
       )
 
       listener.book_updated(event)
@@ -81,7 +81,7 @@ RSpec.describe Catalog::Listeners::UpdateBookListing do
 
   describe "#book_retired" do
     before do
-      Catalog::ReadModels::BookListing.create!(
+      Catalog::ReadModels::BookListing.create(
         book_id: "uuid-1",
         title: "To Retire",
         isbn: "9780306406157",
