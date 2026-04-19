@@ -39,8 +39,8 @@ RSpec.describe Catalog::Commands::AddBook do
       end
 
       it "accepts optional author_id and category_id" do
-        author = Catalog::Author.create!(name: "Uncle Bob")
-        category = Catalog::Category.create!(name: "Software", slug: "software")
+        author = Catalog::Author.create(name: "Uncle Bob")
+        category = Catalog::Category.create(name: "Software", slug: "software")
 
         command.call(title: "Clean Code", isbn: valid_isbn, author_id: author.id, category_id: category.id)
 
@@ -52,7 +52,7 @@ RSpec.describe Catalog::Commands::AddBook do
 
     context "with duplicate ISBN" do
       before do
-        Catalog::Book.create!(title: "Existing", isbn: valid_isbn, status: "active")
+        Catalog::Book.create(title: "Existing", isbn: valid_isbn, status: "active")
       end
 
       it "does not create a book" do

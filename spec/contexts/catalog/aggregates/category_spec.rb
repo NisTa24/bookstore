@@ -20,7 +20,7 @@ RSpec.describe Catalog::Category, type: :model do
     end
 
     it "enforces slug uniqueness" do
-      Catalog::Category.create!(name: "Fiction", slug: "fiction")
+      Catalog::Category.create(name: "Fiction", slug: "fiction")
       duplicate = Catalog::Category.new(name: "Fiction 2", slug: "fiction")
       expect(duplicate).not_to be_valid
       expect(duplicate.errors[:slug]).to include("has already been taken")
@@ -29,7 +29,7 @@ RSpec.describe Catalog::Category, type: :model do
 
   describe "#set_uuid" do
     it "generates a UUID on create" do
-      category = Catalog::Category.create!(name: "Fiction", slug: "fiction")
+      category = Catalog::Category.create(name: "Fiction", slug: "fiction")
       expect(category.id).to match(/\A[0-9a-f-]{36}\z/)
     end
   end

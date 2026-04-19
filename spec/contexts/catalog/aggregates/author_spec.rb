@@ -16,7 +16,7 @@ RSpec.describe Catalog::Author, type: :model do
 
   describe "#set_uuid" do
     it "generates a UUID on create" do
-      author = Catalog::Author.create!(name: "Eric Evans")
+      author = Catalog::Author.create(name: "Eric Evans")
       expect(author.id).to match(/\A[0-9a-f-]{36}\z/)
     end
   end
