@@ -34,7 +34,11 @@ module Api
 
         command.call(
           customer_email: order_params[:customer_email],
-          items: order_params[:items].map { |i| i.to_h.symbolize_keys }
+          items: order_params[:items].map { |i|
+            h = i.to_h.symbolize_keys
+            h[:quantity] = h[:quantity].to_i
+            h
+          }
         )
       end
 
@@ -58,7 +62,7 @@ module Api
       private
 
       def order_params
-        params.require(:order).permit(:customer_email, items: [:book_id, :quantity])
+        params.require(:order).permit(:customer_email, items: [ :book_id, :quantity ])
       end
     end
   end
